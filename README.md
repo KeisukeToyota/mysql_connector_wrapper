@@ -1,2 +1,2 @@
 # mysql_connector_wrapper
-mysql-connector-python(Python2.7)のwrapper
+mysql-connector-python(Python3)のwrapper
