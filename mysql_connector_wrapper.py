@@ -37,9 +37,9 @@ class MySQL_Connect:
       string2 = ''
       for i in range(len(data)):
         string1 += '%s, '
-        if isinstance(data.values()[i],str):
+        if isinstance(list(data.values())[i],str):
           string2 += '%s, '
-        elif isinstance(data.values()[i],int):
+        elif isinstance(list(data.values())[i],int):
           string2 += '%d, '
       string1 = string1[:-2]
       string2 = string2[:-2]
@@ -61,9 +61,9 @@ class MySQL_Connect:
       self.cur.execute('select * from %s' % table)
       string = ''
       for i in range(len(where)):
-        if isinstance(where.values()[i],str):
+        if isinstance(list(where.values())[i],str):
           string += '%s=\'%s\' and '
-        elif isinstance(where.values()[i],int):
+        elif isinstance(list(where.values())[i],int):
           string += '%s=%d and '
       string = string[:-5]
       w = tuple(where.items())
@@ -90,14 +90,14 @@ class MySQL_Connect:
       string1 = ''
       string2 = ''
       for i in range(len(value)):
-        if isinstance(value.values()[i],str):
+        if isinstance(list(value.values())[i],str):
           string1 += '%s=\'%s\', '
-        elif isinstance(value.values()[i],int):
+        elif isinstance(list(value.values())[i],int):
           string1 += '%s=%d, '
       for i in range(len(where)):
-        if isinstance(where.values()[i],str):
+        if isinstance(list(where.values())[i],str):
           string2 += '%s=\'%s\' and '
-        elif isinstance(where.values()[i],int):
+        elif isinstance(list(where.values())[i],int):
           string2 += '%s=%d and '
       string1 = string1[:-2]
       string2 = string2[:-5]
@@ -124,11 +124,13 @@ class MySQL_Connect:
       print(False)
 
 
+  #close
+  def db_close(self):
+    self.cur.close()
+    self.cnn.close()
 
 
-
-
-
-
-import mysql_operation
-sql = mysql_operation.MySQL_Connect('root','Toyota_0715','cyber')
+  #カラム名
+  def db_table_column_name(self,table):
+    self.cur.execute('select * from %s' %table)
+    print(self.cur.column_names)
