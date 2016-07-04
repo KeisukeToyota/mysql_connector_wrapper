@@ -1,6 +1,4 @@
 import mysql.connector
-from collections import OrderedDict
-
 
 class MySQLConnect:
 
