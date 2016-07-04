@@ -133,10 +133,8 @@ class MySQLConnect:
         try:
             string = ''
             for i in range(len(data)):
-                string += list(data.keys())[i]
-                string += ' '
-                string += list(data.values())[i]
-                string += ', '
+                string = string + list(data.keys())[i] \
+                         + ' ' + list(data.values())[i] + ', '
             string = string[:-2]
             c_table = "create table %s (" % table
             c_table = c_table + string + ")"
