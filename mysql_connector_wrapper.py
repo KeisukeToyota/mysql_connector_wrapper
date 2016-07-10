@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 class MySQLConnect:
 
     # コンストラクタ
@@ -129,20 +130,9 @@ class MySQLConnect:
         print(self.cur.column_names)
 
     # テーブル作成
-    def db_create_table(self, table='', data={}):
-        try:
-            string = ''
-            for i in range(len(data)):
-                string = string + list(data.keys())[i] \
-                         + ' ' + list(data.values())[i] + ', '
-            string = string[:-2]
-            c_table = "create table %s (" % table
-            c_table = c_table + string + ")"
-            self.cur.execute(c_table)
-            self.cnn.commit()
-            print(True)
-        except:
-            print(False)
+    def db_query(self, string=''):
+        self.cur.execute(string)
+        self.cnn.commit()
 
     # テーブル削除
     def db_drop_table(self, table=''):
