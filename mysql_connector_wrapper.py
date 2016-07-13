@@ -30,7 +30,7 @@ class MySQLConnect:
     # 挿入
     def db_insert(self, table='', data={}):
         try:
-            self.cur.execute('select * from %s' % table)
+            self.cur.execute('select * from ' + table)
             string1 = ''
             string2 = ''
             for i in range(len(data)):
@@ -58,7 +58,7 @@ class MySQLConnect:
     # 削除
     def db_delete(self, table='', where={}, query=''):
         try:
-            self.cur.execute('select * from %s' % table)
+            self.cur.execute('select * from ' + table)
             string = ''
             for i in range(len(where)):
                 if isinstance(list(where.values())[i], str):
@@ -129,7 +129,7 @@ class MySQLConnect:
 
     # カラム名
     def db_table_column_name(self, table=''):
-        self.cur.execute('show columns from %s' % table)
+        self.cur.execute('show columns from ' + table)
         raw = self.cur.fetchall()
         for column in raw:
             print(column[0] + ' ' + column[1])
@@ -147,7 +147,7 @@ class MySQLConnect:
     # テーブル削除
     def db_drop_table(self, table=''):
         try:
-            self.cur.execute('drop table %s' % table)
+            self.cur.execute('drop table ' + table)
             self.cnn.commit()
             print(True)
         except:
