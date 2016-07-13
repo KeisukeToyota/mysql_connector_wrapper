@@ -85,7 +85,7 @@ class MySQLConnect:
     # アップデート
     def db_update(self, table='', value={}, where={}, query=''):
         try:
-            self.cur.execute('select * from %s' % table)
+            self.cur.execute('select * from ' + table)
             string1 = ''
             string2 = ''
             for i in range(len(value)):
