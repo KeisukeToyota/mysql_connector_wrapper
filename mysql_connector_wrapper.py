@@ -129,13 +129,16 @@ class MySQLConnect:
 
     # カラム名
     def db_table_column_name(self, table=''):
-        self.cur.execute('select * from %s' % table)
-        print(self.cur.column_names)
+        self.cur.execute('show columns from %s' % table)
+        raw = self.cur.fetchall()
+        for column in raw:
+            print(column[0] + ' ' + column[1])
 
     # 実行
     def db_query(self, string=''):
         try:
             self.cur.execute(string)
+            print(self.cur.fetchall())
             self.cnn.commit()
             print(True)
         except:
