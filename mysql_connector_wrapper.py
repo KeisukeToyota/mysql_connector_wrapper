@@ -132,7 +132,7 @@ class MySQLConnect:
         self.cur.execute('select * from %s' % table)
         print(self.cur.column_names)
 
-    # テーブル作成
+    # 実行
     def db_query(self, string=''):
         try:
             self.cur.execute(string)
