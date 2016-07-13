@@ -39,6 +39,8 @@ class MySQLConnect:
                     string2 += '%s, '
                 elif isinstance(list(data.values())[i], int):
                     string2 += '%d, '
+                elif list(data.values())[i] == None:
+                    string2 += '%s, '
             string1 = string1[:-2]
             string2 = string2[:-2]
             string1 = string1 % tuple(data.keys())
@@ -46,6 +48,8 @@ class MySQLConnect:
             insert = insert + string1 + ") values (" + string2 + ")"
             insert = insert.replace('%s', '\'%s\'')
             insert = insert % tuple(data.values())
+            insert = insert.replace('\'None\'','null')
+            print(insert)
             self.cur.execute(insert)
             self.cnn.commit()
             print(True)
@@ -131,8 +135,12 @@ class MySQLConnect:
 
     # テーブル作成
     def db_query(self, string=''):
-        self.cur.execute(string)
-        self.cnn.commit()
+        try:
+            self.cur.execute(string)
+            self.cnn.commit()
+            print(True)
+        except:
+            print(False)
 
     # テーブル削除
     def db_drop_table(self, table=''):
