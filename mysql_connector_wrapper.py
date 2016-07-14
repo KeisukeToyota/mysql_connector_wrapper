@@ -39,6 +39,8 @@ class MySQLConnect:
                     string2 += '%s, '
                 elif isinstance(list(data.values())[i], int):
                     string2 += '%d, '
+                elif isinstance(list(data.values())[i], bool):
+                    string2 += '%s, '
                 elif list(data.values())[i] == None:
                     string2 += '%s, '
             string1 = string1[:-2]
