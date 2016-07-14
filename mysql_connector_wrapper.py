@@ -51,6 +51,8 @@ class MySQLConnect:
             insert = insert.replace('%s', '\'%s\'')
             insert = insert % tuple(data.values())
             insert = insert.replace('\'None\'', 'null')
+            insert = insert.replace('\'True\'','1')
+            insert = insert.replace('\'False\'','0')
             self.cur.execute(insert)
             self.cnn.commit()
             print(True)
