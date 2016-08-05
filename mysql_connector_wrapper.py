@@ -35,14 +35,10 @@ class MySQLConnect:
             string2 = ''
             for i in range(len(data)):
                 string1 += '%s, '
-                if isinstance(list(data.values())[i], str):
+                if isinstance(list(data.values())[i], str or bool or None):
                     string2 += '%s, '
                 elif isinstance(list(data.values())[i], int):
                     string2 += '%d, '
-                elif isinstance(list(data.values())[i], bool):
-                    string2 += '%s, '
-                elif list(data.values())[i] == None:
-                    string2 += '%s, '
             string1 = string1[:-2]
             string2 = string2[:-2]
             string1 = string1 % tuple(data.keys())
@@ -51,8 +47,8 @@ class MySQLConnect:
             insert = insert.replace('%s', '\'%s\'')
             insert = insert % tuple(data.values())
             insert = insert.replace('\'None\'', 'null')
-            insert = insert.replace('\'True\'','1')
-            insert = insert.replace('\'False\'','0')
+            insert = insert.replace('\'True\'', '1')
+            insert = insert.replace('\'False\'', '0')
             self.cur.execute(insert)
             self.cnn.commit()
             print(True)
@@ -116,10 +112,8 @@ class MySQLConnect:
             string2 = string2 % where
             update = 'update %s set ' % table
             update = update + string1 + ' where ' + string2
-            if query and where:
-                update = update + ' and ' + query
-            else:
-                update = update + query
+            update = update + ' and ' + \
+                query if(query and where) else update + query
             self.cur.execute(update)
             self.cnn.commit()
             print(True)
