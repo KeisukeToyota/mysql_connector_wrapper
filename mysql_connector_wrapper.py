@@ -136,7 +136,6 @@ class MySQLConnect:
     def db_query(self, string=''):
         try:
             self.cur.execute(string)
-            print(self.cur.fetchall())
             self.cnn.commit()
             print(True)
         except:
