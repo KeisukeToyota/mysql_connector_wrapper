@@ -16,7 +16,7 @@ class MySQLConnect:
         self.cur = self.cnn.cursor(buffered=True)
 
     # 文の実行、実行結果を成形して返す
-    def db_result(self, string=''):
+    def result(self, string=''):
         self.cur.execute(string)
         raw = self.cur.fetchall()
         result = []
@@ -28,7 +28,7 @@ class MySQLConnect:
         return result
 
     # 挿入
-    def db_insert(self, table='', data={}):
+    def insert(self, table='', data={}):
         try:
             self.cur.execute('select * from ' + table)
             string1 = ''
@@ -56,7 +56,7 @@ class MySQLConnect:
             print(False)
 
     # 削除
-    def db_delete(self, table='', where={}, query=''):
+    def delete(self, table='', where={}, query=''):
         try:
             self.cur.execute('select * from ' + table)
             string = ''
@@ -83,7 +83,7 @@ class MySQLConnect:
             print(False)
 
     # アップデート
-    def db_update(self, table='', value={}, where={}, query=''):
+    def update(self, table='', value={}, where={}, query=''):
         try:
             self.cur.execute('select * from ' + table)
             string1 = ''
@@ -121,19 +121,19 @@ class MySQLConnect:
             print(False)
 
     # close
-    def db_close(self):
+    def close(self):
         self.cur.close()
         self.cnn.close()
 
     # カラム名
-    def db_table_column_name(self, table=''):
+    def table_column_name(self, table=''):
         self.cur.execute('show columns from ' + table)
         raw = self.cur.fetchall()
         for column in raw:
             print(column[0] + ' ' + column[1])
 
     # 実行
-    def db_query(self, string=''):
+    def query(self, string=''):
         try:
             self.cur.execute(string)
             self.cnn.commit()
@@ -142,7 +142,7 @@ class MySQLConnect:
             print(False)
 
     # テーブル削除
-    def db_drop_table(self, table=''):
+    def drop_table(self, table=''):
         try:
             self.cur.execute('drop table ' + table)
             self.cnn.commit()
