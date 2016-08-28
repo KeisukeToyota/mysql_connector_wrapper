@@ -15,7 +15,7 @@ class MySQLConnect:
                                            db=self.db)
         self.cur = self.cnn.cursor(buffered=True)
 
-    # 文の実行、実行結果を成形して返す
+    # 文の実行、実行結果を整形して返す
     def result(self, string=''):
         self.cur.execute(string)
         raw = self.cur.fetchall()
